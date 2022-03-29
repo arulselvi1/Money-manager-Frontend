@@ -1,73 +1,73 @@
-import React from 'react'
-import './App.css'
-import { Dashboard } from './Components/Dashboard'
-import { History } from './Components/History'
-import { Monthly } from './Components/Monthly'
-import { Weekly } from './Components/Weekly'
-import { Yearly } from './Components/Yearly'
-import { NotFound } from './Components/NotFound'
-import { useState } from 'react'
-import AppBar from '@mui/material/AppBar'
-import Toolbar from '@mui/material/Toolbar'
-import Button from '@mui/material/Button'
-import { useHistory } from 'react-router-dom'
-import { Switch, Route } from 'react-router-dom'
-import Box from '@mui/material/Box'
-import Drawer from '@mui/material/Drawer'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemText from '@mui/material/ListItemText'
-import { Fragment } from 'react'
-import MenuIcon from '@mui/icons-material/Menu'
-import HomeIcon from '@mui/icons-material/Home'
-import Paper from '@mui/material/Paper'
-import Brightness4Icon from '@mui/icons-material/Brightness4'
-import Brightness7Icon from '@mui/icons-material/Brightness7'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
-import GridViewIcon from '@mui/icons-material/GridView'
-import HistoryIcon from '@mui/icons-material/History'
-import { EditData } from './Components/Edit'
-import { Home } from './Components/home'
-
+import React from "react";
+import "./App.css";
+import { Dashboard } from "./Components/Dashboard";
+import { History } from "./Components/History";
+import { Monthly } from "./Components/Monthly";
+import { Weekly } from "./Components/Weekly";
+import { Yearly } from "./Components/Yearly";
+import { NotFound } from "./Components/NotFound";
+import { useState } from "react";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Button from "@mui/material/Button";
+import { useHistory } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import { Fragment } from "react";
+import MenuIcon from "@mui/icons-material/Menu";
+import HomeIcon from "@mui/icons-material/Home";
+import Paper from "@mui/material/Paper";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import GridViewIcon from "@mui/icons-material/GridView";
+import HistoryIcon from "@mui/icons-material/History";
+import { EditData } from "./Components/Edit";
+import { Home } from "./Components/home";
+import logo from "./pic.png";
 function App() {
-  const history = useHistory()
+  const history = useHistory();
 
   const array = [
     {
       name: <div className="drawer-name">Home</div>,
-      onClick: '/',
+      onClick: "/",
       icon: <HomeIcon />,
     },
     {
       name: <div className="drawer-name">Dashboard</div>,
-      onClick: '/dashboard',
+      onClick: "/dashboard",
       icon: <GridViewIcon />,
     },
     {
       name: <div className="drawer-name">History-charts</div>,
-      onClick: '/history',
+      onClick: "/history",
       icon: <HistoryIcon />,
     },
-  ]
+  ];
 
   const [state, setState] = useState({
     left: false,
-  })
+  });
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
-      event.type === 'keydown' &&
-      (event.key === 'Tab' || event.key === 'Shift')
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
     ) {
-      return
+      return;
     }
 
-    setState({ ...state, [anchor]: open })
-  }
+    setState({ ...state, [anchor]: open });
+  };
 
   const list = (anchor) => (
     <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
@@ -78,7 +78,7 @@ function App() {
             button
             key={name}
             onClick={() => {
-              history.push(onClick)
+              history.push(onClick);
             }}
           >
             <ListItemText color="success" primary={name} />
@@ -87,21 +87,22 @@ function App() {
         ))}
       </List>
     </Box>
-  )
-  const [mode, setMode] = useState('dark')
-  const [color, setColor] = useState('white')
+  );
+  const [mode, setMode] = useState("dark");
+  const [color, setColor] = useState("white");
   const theme = createTheme({
     palette: {
       mode: mode,
     },
-  })
+  });
   return (
     <ThemeProvider theme={theme}>
-      <Paper style={{ borderRadius: '0px', minHeight: '100vh' }} elevation={4}>
+      <Paper style={{ borderRadius: "0px", minHeight: "100vh" }} elevation={4}>
         <div className="App">
+          <img src={logo} alt="Profile" height={150} width={150} />
           <AppBar position="static">
             <Toolbar>
-              {['left'].map((anchor) => (
+              {["left"].map((anchor) => (
                 <Fragment key={anchor}>
                   <Button
                     className="mode"
@@ -122,16 +123,16 @@ function App() {
               ))}
               <Button
                 color="inherit"
-                style={{ marginLeft: 'auto' }}
+                style={{ marginLeft: "auto" }}
                 startIcon={
-                  mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />
+                  mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />
                 }
                 onClick={() => {
-                  setMode(mode === 'light' ? 'dark' : 'light')
-                  setColor(mode === 'dark' ? 'black' : 'white')
+                  setMode(mode === "light" ? "dark" : "light");
+                  setColor(mode === "dark" ? "black" : "white");
                 }}
               >
-                {mode === 'light' ? 'dark' : 'light'} Mode
+                {mode === "light" ? "dark" : "light"} Mode
               </Button>
             </Toolbar>
           </AppBar>
@@ -168,7 +169,7 @@ function App() {
         </div>
       </Paper>
     </ThemeProvider>
-  )
+  );
 }
 
-export default App
+export default App;
